@@ -107,7 +107,7 @@ form.addEventListener("submit", function (e) {
   fetch("https://cutoff-backend-7q70.onrender.com/addSubscription", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(sub,userEmail)
+    body: JSON.stringify(sub)
   }).then(() => {
     form.reset();
     loadSubscriptions();
@@ -174,12 +174,7 @@ function addCard(sub) {
   list.prepend(div);
 }
 
-// function deleteSub(id) {
-//   subscriptions = subscriptions.filter(s => s.id !== id);
-//   localStorage.setItem("subscriptions", JSON.stringify(subscriptions));
-//   list.innerHTML = "";
-//   subscriptions.forEach(addCard);
-// }
+
 function deleteSub(row) {
   fetch(`https://cutoff-backend-7q70.onrender.com/deleteSubscription/${row}`, {
     method: "DELETE"
@@ -187,23 +182,6 @@ function deleteSub(row) {
     loadSubscriptions(); // Refresh UI after delete
   });
 }
-
-// function editSub(id) {
-//   const sub = subscriptions.find(s => s.id === id);
-
-//   document.getElementById("name").value = sub.name;
-//   document.getElementById("platform").value = sub.platform;
-//   document.getElementById("startDate").value = sub.startDate;
-//   document.getElementById("endDate").value = sub.endDate;
-//   document.getElementById("email").value = sub.email;
-//   document.getElementById("mobile").value = sub.mobile;
-
-//   // Remove old entry before re-saving after edit
-//   subscriptions = subscriptions.filter(s => s.id !== id);
-//   localStorage.setItem("subscriptions", JSON.stringify(subscriptions));
-//   list.innerHTML = "";
-//   subscriptions.forEach(addCard);
-// }
 
 
 function editSub(row) {
