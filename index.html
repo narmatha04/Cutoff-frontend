@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cutoff - Login</title>
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: #f5f7fc;
+      color: #111827;
+    }
+
+    .logo {
+      font-size: 40px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    .tagline {
+      font-size: 18px;
+      opacity: 0.7;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .login-box {
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* make Google button smaller + clean */
+    .g_id_signin {
+      transform: scale(1.3);
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1 class="logo">Cutoff</h1>
+  <p class="tagline">Your subscriptions, on your schedule</p>
+
+  <div class="login-box">
+
+    <div id="g_id_onload"
+         data-client_id="721433766643-7b1ck9io0v0ukgoa0l7vj4unvvvntfl2.apps.googleusercontent.com"
+         data-callback="handleLogin"
+         data-auto_prompt="false">
+    </div>
+
+    <div class="g_id_signin"
+         data-type="standard"
+         data-size="medium"
+         data-theme="outline"
+         data-shape="pill">
+    </div>
+
+  </div>
+
+<script>
+function handleLogin(response) {
+  const user = jwt_decode(response.credential);
+  localStorage.setItem("userEmail", user.email);
+  window.location.href = "dashboard.html";
+}
+</script>
+
+</body>
+</html>
